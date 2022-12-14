@@ -14,15 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('post_votes', function (Blueprint $table) {
-            $table->ulid('id')->primary();
+            $table->id();
             $table->tinyInteger('vote');
             $table->timestamps();
             $table->softDeletes();
         });
 
         Schema::table('post_votes', function (Blueprint $table) {
-            $table->foreignUlid('post_id')->constrained()->cascadeOnDelete();
-            $table->foreignUlid('user_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('post_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
         });
     }
 

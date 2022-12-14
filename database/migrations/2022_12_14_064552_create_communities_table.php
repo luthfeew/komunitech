@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('communities', function (Blueprint $table) {
-            $table->ulid('id')->primary();
+            $table->id();
             $table->string('name');
             $table->string('slug')->unique();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->string('logo')->nullable();
             $table->string('banner')->nullable();
             $table->timestamps();

@@ -14,6 +14,10 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
-        //
+        // Attach posts to users
+        \App\Models\Post::all()->each(function ($post) {
+            $post->user_id = \App\Models\User::inRandomOrder()->first()->id;
+            $post->save();
+        });
     }
 }

@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Community extends Model
 {
     use HasFactory;
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'community_users', 'community_id', 'user_id')->withTimestamps();
+    }
 }

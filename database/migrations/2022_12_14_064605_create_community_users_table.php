@@ -14,14 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('community_users', function (Blueprint $table) {
-            $table->ulid('id')->primary();
+            $table->id();
+            $table->enum('role', ['owner', 'admin', 'member'])->default('member');
             $table->timestamps();
             $table->softDeletes();
         });
 
         Schema::table('community_users', function (Blueprint $table) {
-            $table->foreignUlid('community_id')->constrained()->cascadeOnDelete();
-            $table->foreignUlid('user_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('community_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
         });
     }
 

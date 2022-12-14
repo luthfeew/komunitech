@@ -14,6 +14,14 @@ class PostVoteSeeder extends Seeder
      */
     public function run()
     {
-        //
+        // Create 10 votes for each post
+        for ($i = 1; $i <= 100; $i++) {
+            for ($j = 1; $j <= 10; $j++) {
+                \App\Models\PostVote::factory()->create([
+                    'post_id' => $i,
+                    'user_id' => $j,
+                ]);
+            }
+        }
     }
 }

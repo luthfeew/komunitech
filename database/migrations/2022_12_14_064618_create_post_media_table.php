@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('post_media', function (Blueprint $table) {
-            $table->ulid('id')->primary();
+            $table->id();
             $table->enum('type', ['image', 'video']);
             $table->string('path');
             $table->timestamps();
@@ -22,7 +22,7 @@ return new class extends Migration
         });
 
         Schema::table('post_media', function (Blueprint $table) {
-            $table->foreignUlid('post_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('post_id')->constrained()->cascadeOnDelete();
         });
     }
 

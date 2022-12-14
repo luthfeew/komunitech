@@ -17,7 +17,7 @@ class PostVoteFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'vote' => fake()->optional(0.45, '1')->randomElement(['-1', '1']),
         ];
     }
 }
