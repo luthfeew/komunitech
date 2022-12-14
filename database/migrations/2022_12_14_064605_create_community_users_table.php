@@ -14,8 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('community_users', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
             $table->timestamps();
+            $table->softDeletes();
+        });
+
+        Schema::table('community_users', function (Blueprint $table) {
+            $table->foreignUlid('community_id')->constrained()->cascadeOnDelete();
+            $table->foreignUlid('user_id')->nullable()->constrained()->nullOnDelete();
         });
     }
 

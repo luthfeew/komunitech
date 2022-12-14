@@ -14,8 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('communities', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
+            $table->string('name');
+            $table->string('slug')->unique();
+            $table->string('description')->nullable();
+            $table->string('logo')->nullable();
+            $table->string('banner')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

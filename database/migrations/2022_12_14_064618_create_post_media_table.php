@@ -14,8 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('post_media', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
+            $table->enum('type', ['image', 'video']);
+            $table->string('path');
             $table->timestamps();
+            $table->softDeletes();
+        });
+
+        Schema::table('post_media', function (Blueprint $table) {
+            $table->foreignUlid('post_id')->constrained()->cascadeOnDelete();
         });
     }
 
