@@ -14,6 +14,13 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
+        // Create 10 posts for each community
+        \App\Models\Community::all()->each(function ($community) {
+            \App\Models\Post::factory(10)->create([
+                'community_id' => $community->id,
+            ]);
+        });
+
         // Attach posts to users
         \App\Models\Post::all()->each(function ($post) {
             $post->user_id = \App\Models\User::inRandomOrder()->first()->id;

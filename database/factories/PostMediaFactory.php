@@ -17,7 +17,8 @@ class PostMediaFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'type' => 'image',
+            'url' => 'https://picsum.photos/seed/' . rand(1, 1000) . '/700/1000',
         ];
     }
 }

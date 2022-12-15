@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('post_media', function (Blueprint $table) {
             $table->id();
             $table->enum('type', ['image', 'video']);
-            $table->string('path');
+            $table->string('url');
             $table->timestamps();
             $table->softDeletes();
         });

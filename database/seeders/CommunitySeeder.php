@@ -23,12 +23,5 @@ class CommunitySeeder extends Seeder
                 \App\Models\User::inRandomOrder()->limit(5)->pluck('id')->toArray()
             );
         });
-
-        // Create 10 posts for each community
-        \App\Models\Community::all()->each(function ($community) {
-            \App\Models\Post::factory(10)->create([
-                'community_id' => $community->id,
-            ]);
-        });
     }
 }

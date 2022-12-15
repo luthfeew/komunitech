@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\User::factory()->create([
             'name' => 'Luthfi Wijaya',
+            'username' => 'luthfeew',
             'email' => 'luthfeew@gmail.com',
             'password' => Hash::make('12345679'),
         ]);
@@ -26,6 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CommunitySeeder::class,
             PostSeeder::class,
+            PostMediaSeeder::class,
             PostVoteSeeder::class,
         ]);
     }

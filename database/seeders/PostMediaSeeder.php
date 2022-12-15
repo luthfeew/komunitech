@@ -14,6 +14,13 @@ class PostMediaSeeder extends Seeder
      */
     public function run()
     {
-        //
+        // Create 30 media for each post
+        for ($i = 35; $i <= 65; $i++) {
+            if (mt_rand(0, 1)) {
+                \App\Models\PostMedia::factory()->create([
+                    'post_id' => $i,
+                ]);
+            }
+        }
     }
 }

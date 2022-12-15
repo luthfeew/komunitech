@@ -23,6 +23,7 @@ class PostFactory extends Factory
             'title' => $title,
             'slug' => Str::slug($title, '_'),
             'body' => fake()->paragraphs(3, true),
+            'created_at' => fake()->dateTimeBetween('-1 day', 'now'),
         ];
     }
 }
