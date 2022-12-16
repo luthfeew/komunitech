@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Vinkla\Hashids\Facades\Hashids;
 
 class PostController extends Controller
 {
@@ -12,9 +13,14 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($k_slug, $id, $p_slug = null)
     {
-        //
+        // decode post id using hashids
+        $post_id = Hashids::decode($id)[0];
+        $post = Post::find($post_id);
+        return view('post.index', [
+            'item' => $post,
+        ]);
     }
 
     /**

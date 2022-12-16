@@ -26,26 +26,34 @@
                                     style="max-width: 20px;">
                             </div>
                             <div class="d-flex flex-row align-items-center lh-1">
-                                <div>k/{{ $item->community->slug }}</div>
+                                <div>
+                                    <a href="{{ url('k/' . $item->community->slug) }}"
+                                        class="text-decoration-none">k/{{ $item->community->slug }}</a>
+                                </div>
                                 <div class="mx-1">&#x2022;</div>
                                 <div>
                                     <span>Diposting oleh</span>
-                                    <span>u/{{ $item->user->username }}</span>
+                                    <span>
+                                        <a href="{{ url('user/' . $item->user->username) }}"
+                                            class="text-decoration-none">u/{{ $item->user->username }}</a>
+                                    </span>
                                     <span>{{ $item->created_at->diffForHumans() }}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="mx-2 mb-2 lh-sm fs-5 fw-semibold text-break">
-                            {{ $item->title }}
+                            <a href="{{ url('k/' . $item->community->slug . '/post/' . $item->hashid . '/' . $item->slug) }}"
+                                class="text-reset text-decoration-none">{{ $item->title }}</a>
                         </div>
                         @if ($item->media->isNotEmpty())
                             <div class="media-container">
-                                <img src="{{ $item->media->pluck('url')->first() }}" class="img-fluid" alt="...">
+                                <img src="{{ $item->media->pluck('url')->first() }}" class="img-fluid">
                                 <div class="text">see full image</div>
                             </div>
                         @else
                             <div class="mx-2 mb-2 lh-sm text-break">
-                                {{ Str::limit($item->body, 300) }}
+                                <a href="{{ url('k/' . $item->community->slug . '/post/' . $item->hashid . '/' . $item->slug) }}"
+                                    class="text-reset text-decoration-none">{{ Str::limit($item->body, 300) }}</a>
                             </div>
                         @endif
                         <div class="ps-1 pe-2 d-flex flex-row">

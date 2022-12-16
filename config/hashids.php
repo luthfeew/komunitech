@@ -40,7 +40,7 @@ return [
         'main' => [
             'salt' => 'mendingturu',
             'length' => 6,
-            'alphabet' => 'abcdefghijklmnopqrstuvwxyz1234567890'
+            'alphabet' => 'abcdefghjkmnpqrstvwxyz1234567890'
         ],
 
         'alternative' => [
