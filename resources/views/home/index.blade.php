@@ -40,7 +40,7 @@
             </div>
             <div class="p-2 d-none d-lg-block" style="width: 336px;">
                 <!-- SIDEBAR -->
-                @include('layouts.sidebar')
+                @include('components.home-sidebar')
                 <!-- END SIDEBAR -->
             </div>
         </div>

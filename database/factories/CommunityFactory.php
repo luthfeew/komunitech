@@ -23,7 +23,7 @@ class CommunityFactory extends Factory
             'name' => $name,
             'slug' => Str::slug($name, '_'),
             'description' => fake()->catchPhrase(),
-            'logo' => 'https://picsum.photos/id/' . rand(1, 1000) . '/64',
+            'logo' => 'https://picsum.photos/id/' . rand(1, 1000) . '/80',
             'banner' => 'https://picsum.photos/id/' . rand(1, 1000) . '/1280/360',
         ];
     }

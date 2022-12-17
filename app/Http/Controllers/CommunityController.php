@@ -44,9 +44,12 @@ class CommunityController extends Controller
      * @param  \App\Models\Community  $community
      * @return \Illuminate\Http\Response
      */
-    public function show(Community $community)
+    public function show(Community $community, $k_slug)
     {
-        //
+        $community = Community::where('slug', $k_slug)->first();
+        return view('community.show', [
+            'item' => $community,
+        ]);
     }
 
     /**

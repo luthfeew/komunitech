@@ -13,14 +13,9 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($k_slug, $id, $p_slug = null)
+    public function index()
     {
-        // decode post id using hashids
-        $post_id = Hashids::decode($id)[0];
-        $post = Post::find($post_id);
-        return view('post.index', [
-            'item' => $post,
-        ]);
+        //
     }
 
     /**
@@ -50,9 +45,14 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Post $post, $k_slug, $id, $p_slug = null)
     {
-        //
+        // decode post id using hashids
+        $post_id = Hashids::decode($id)[0];
+        $post = Post::find($post_id);
+        return view('post.show', [
+            'item' => $post,
+        ]);
     }
 
     /**
