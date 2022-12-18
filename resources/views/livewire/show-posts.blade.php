@@ -21,16 +21,20 @@
                     </div>
                     <div class="pt-2 d-flex flex-column">
                         <div class="mx-2 mb-2 d-flex flex-row align-items-center">
-                            <div>
-                                <img src="{{ $item->community->logo }}" class="img-fluid rounded-circle me-1"
-                                    style="max-width: 20px;">
-                            </div>
-                            <div class="d-flex flex-row align-items-center lh-1">
+                            @if (!$is_community)
                                 <div>
-                                    <a href="{{ url('k/' . $item->community->slug) }}"
-                                        class="text-decoration-none">k/{{ $item->community->slug }}</a>
+                                    <img src="{{ $item->community->logo }}" class="img-fluid rounded-circle me-1"
+                                        style="max-width: 20px;">
                                 </div>
-                                <div class="mx-1">&#x2022;</div>
+                            @endif
+                            <div class="d-flex flex-row align-items-center lh-1">
+                                @if (!$is_community)
+                                    <div>
+                                        <a href="{{ url('k/' . $item->community->slug) }}"
+                                            class="text-decoration-none">k/{{ $item->community->slug }}</a>
+                                    </div>
+                                    <div class="mx-1">&#x2022;</div>
+                                @endif
                                 <div>
                                     <span>Diposting oleh</span>
                                     <span>
@@ -76,7 +80,7 @@
                                 <button type="button" class="btn btn-light"
                                     style="--bs-btn-padding-x: 0.5rem; --bs-btn-padding-y: 0.2rem; --bs-btn-bg: #FFFFFF; --bs-btn-border-color: #FFFFFF; --bs-btn-font-size: .90rem;">
                                     <i class="fa-regular fa-message"></i>
-                                    {{ $item->comments->sum('id') }} Komentar
+                                    {{ $item->comments->count() }} Komentar
                                 </button>
                             </div>
                             <div>

@@ -9,6 +9,7 @@ use Vinkla\Hashids\Facades\Hashids;
 class ShowPosts extends Component
 {
     public $numResults = 5;
+    public $community;
 
     protected $listeners = [
         'load-more' => 'loadMore'
@@ -21,7 +22,19 @@ class ShowPosts extends Component
 
     public function render()
     {
-        $posts = Post::orderBy('created_at', 'desc')->take($this->numResults)->get();
+        if ($this->community) {
+            $posts = Post::where('community_id', $this->community->id)
+                ->orderBy('created_at', 'desc')
+                ->take($this->numResults)
+                ->get();
+            $is_community = true;
+        } else {
+            $posts = Post::orderBy('created_at', 'desc')
+                ->take($this->numResults)
+                ->get();
+            $is_community = false;
+        }
+
         // encode post id using hashids
         foreach ($posts as $post) {
             $post->hashid = Hashids::encode($post->id);
@@ -30,6 +43,7 @@ class ShowPosts extends Component
         $this->dispatchBrowserEvent('loading-complete');
         return view('livewire.show-posts', [
             'posts' => $posts,
+            'is_community' => $is_community
         ]);
     }
 }

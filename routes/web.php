@@ -27,5 +27,6 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/k/{k_slug}', [CommunityController::class, 'show'])->name('community.show');
 Route::get('/k/{k_slug}/post/{id}/{p_slug?}', [PostController::class, 'show'])->name('post.show');
+Route::post('/post/{id}/submit', [PostController::class, 'store'])->name('post.store');
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\PostComment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Vinkla\Hashids\Facades\Hashids;
 
 class PostController extends Controller
@@ -34,9 +36,25 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        if (Auth::check()) {
+            // get user id
+            $user_id = Auth::user()->id;
+            // get post id
+            $post_id = Hashids::decode($id)[0];
+            // save comment
+            PostComment::create([
+                'body' => $request->body,
+                'post_id' => $post_id,
+                'user_id' => $user_id,
+                'parent_id' => $request->parent_id,
+            ]);
+            // redirect to previous page
+            return back();
+        } else {
+            return redirect()->route('login');
+        }
     }
 
     /**
@@ -52,6 +70,7 @@ class PostController extends Controller
         $post = Post::find($post_id);
         return view('post.show', [
             'item' => $post,
+            'hashid' => $id,
         ]);
     }
 

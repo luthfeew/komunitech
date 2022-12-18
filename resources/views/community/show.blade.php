@@ -13,10 +13,10 @@
 @section('content')
     <div>
         <span class="banner-image"
-            style="background: url('https://styles.redditmedia.com/t5_2y4au1/styles/bannerBackgroundImage_b6oegeaoa3991.png?width=4000&s=e107684fb8623e86938a70e4a509974e46befa6a') center center / cover no-repeat rgb(51, 168, 255); filter: none; height: 228px;"></span>
+            style="background: url('{{ $item->banner }}') center center / cover no-repeat rgb(51, 168, 255); filter: none; height: 228px;"></span>
     </div>
     <div class="container">
-        <div class="d-flex px-4 pb-4 align-items-center" style="margin-top: -14px">
+        <div class="d-flex px-4 pb-2 align-items-center" style="margin-top: -14px">
             <div>
                 <img src="{{ $item->logo }}" class="img-fluid rounded-circle" style="border: 4px solid #fff;">
             </div>
@@ -31,6 +31,23 @@
                 </div>
                 <div class="mt-1">
                     <button type="button" class="btn btn-outline-primary btn-sm rounded-pill px-4">Gabung</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bg-light">
+        {{ $item }}
+        <div class="container-fluid g-0">
+            <div class="d-flex flex-row justify-content-center">
+                <div class="p-2 " style="width: 756px;">
+                    <!-- POSTINGAN -->
+                    @livewire('show-posts', ['community' => $item])
+                    <!-- END POSTINGAN -->
+                </div>
+                <div class="p-2 d-none d-lg-block" style="width: 336px;">
+                    <!-- ABOUT COMMUNITY -->
+                    @include('components.about-community', ['community' => $item])
+                    <!-- END ABOUT COMMUNITY -->
                 </div>
             </div>
         </div>

@@ -7,13 +7,16 @@
             margin-left: auto;
             margin-right: auto;
         }
+        .display-comment .display-comment {
+            margin-left: 20px
+        }
     </style>
 @endsection
 
-@section('js-head')
+{{-- @section('js-head')
     <script src="https://cdn.tiny.cloud/1/w6uv1j0u0l6dbkq8yq3s12nakt4kvbz3fz82bxp8xtend2oa/tinymce/6/tinymce.min.js"
         referrerpolicy="origin"></script>
-@endsection
+@endsection --}}
 
 @section('content')
     <div class="container-fluid g-0">
@@ -93,7 +96,7 @@
                                         <button type="button" class="btn btn-light"
                                             style="--bs-btn-padding-x: 0.5rem; --bs-btn-padding-y: 0.2rem; --bs-btn-bg: #FFFFFF; --bs-btn-border-color: #FFFFFF; --bs-btn-font-size: .90rem;">
                                             <i class="fa-regular fa-message"></i>
-                                            {{ $item->comments->sum('id') }} Komentar
+                                            {{ $item->comments->count() }} Komentar
                                         </button>
                                     </div>
                                     <div>
@@ -114,13 +117,17 @@
                             </div>
                         </div>
                         <div class="m-4">
-                            <textarea id="main_comment" placeholder="Berikan pendapatmu..."></textarea>
-                            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2">
-                                <button class="btn btn-primary btn-sm rounded-pill px-5" type="button">Kirim</button>
-                            </div>
+                            <form action="{{ route('post.store', ['id' => $hashid]) }}" method="POST">
+                                @csrf
+                                <textarea class="form-control" rows="3" id="comment" name="body" placeholder="Berikan pendapatmu..." required></textarea>
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2">
+                                    <button class="btn btn-primary btn-sm rounded-pill px-5" type="submit">Kirim</button>
+                                </div>
+                            </form>
                         </div>
                         <div class="m-4">
-                            asd
+                            {{-- @include('components.comment', ['comments' => $item->comments, 'post' => $item]) --}}
+                            @include('components.comment')
                         </div>
                     </div>
                 </div>
@@ -128,14 +135,14 @@
             </div>
             <div class="p-2 d-none d-lg-block" style="width: 336px;">
                 <!-- ABOUT COMMUNITY -->
-                @include('components.about-community')
+                @include('components.about-community', ['community' => $item->community])
                 <!-- END ABOUT COMMUNITY -->
             </div>
         </div>
     </div>
 @endsection
 
-@section('js-body')
+{{-- @section('js-body')
     <script>
         tinymce.init({
             menubar: false,
@@ -145,4 +152,4 @@
             content_css: '/vendor/tinymce/myLayout.css'
         });
     </script>
-@endsection
+@endsection --}}
