@@ -50,8 +50,8 @@ class PostController extends Controller
                 'user_id' => $user_id,
                 'parent_id' => $request->parent_id,
             ]);
-            // redirect to previous page
-            return back();
+            // redirect to previous page with success message
+            return redirect()->back()->with('success', 'Comment added successfully');
         } else {
             return redirect()->route('login');
         }
