@@ -47,7 +47,7 @@
                         @else
                             <div class="mx-2 mb-2 lh-sm text-break">
                                 <a href="{{ url('k/' . $item->community->slug . '/post/' . $item->hashid . '/' . $item->slug) }}"
-                                    class="text-reset text-decoration-none">{{ Str::limit($item->body, 300) }}</a>
+                                    class="text-reset text-decoration-none">{!! Str::limit($item->body, 300) !!}</a>
                             </div>
                         @endif
                         <div class="ps-1 pe-2 d-flex flex-row">
@@ -82,7 +82,7 @@
                 </div>
                 @if ($is_post)
                     <div class="m-4">
-                        <form action="{{ route('post.store', ['id' => $item->hashid]) }}" method="POST">
+                        <form action="{{ route('comment.store', ['id' => $item->hashid]) }}" method="POST">
                             @csrf
                             <textarea class="form-control" rows="3" id="comment" name="body" placeholder="Berikan pendapatmu..."
                                 required></textarea>
