@@ -42,7 +42,9 @@
                         @if ($item->media->isNotEmpty())
                             <div class="media-container">
                                 <img src="{{ $item->media->pluck('url')->first() }}" class="img-fluid">
-                                <div class="text">see full image</div>
+                                @if (!$is_post)
+                                    <div class="text">see full image</div>
+                                @endif
                             </div>
                         @else
                             <div class="mx-2 mb-2 lh-sm text-break">
@@ -84,7 +86,7 @@
                     <div class="m-4">
                         <form action="{{ route('comment.store', ['id' => $item->hashid]) }}" method="POST">
                             @csrf
-                            <textarea class="form-control" rows="3" id="comment" name="body" placeholder="Berikan pendapatmu..."
+                            <textarea class="form-control" rows="5" id="comment" name="body" placeholder="Berikan pendapatmu..."
                                 required></textarea>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2">
                                 <button class="btn btn-primary btn-sm rounded-pill px-5" type="submit">Kirim</button>
@@ -101,8 +103,9 @@
                                     aria-label="Close"></button>
                             </div>
                         @endif
-                        {{-- @include('components.comment', ['comments' => $item->comments, 'post' => $item]) --}}
-                        @include('components.comment')
+                        <!-- BAGIAN KOMENTAR -->
+                        @livewire('show-comment', ['post_id' => $item->id])
+                        <!-- END BAGIAN KOMENTAR -->
                     </div>
                 @endif
             </div>

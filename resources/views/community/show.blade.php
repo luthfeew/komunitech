@@ -7,6 +7,31 @@
             height: 228px;
             display: block;
         }
+        .media-container {
+            max-height: 512px;
+            overflow: hidden;
+            margin: 0px auto;
+            position: relative;
+        }
+
+        .media-container .text {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .5px;
+            line-height: 24px;
+            text-transform: uppercase;
+            background-color: rgba(80, 85, 87, .8);
+            border-radius: 4px;
+            bottom: 16px;
+            color: #fff;
+            line-height: 32px;
+            position: absolute;
+            text-align: center;
+            text-decoration: none;
+            width: 320px;
+            left: 50%;
+            transform: translate(-50%);
+        }
     </style>
 @endsection
 
