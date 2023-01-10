@@ -36,7 +36,6 @@
         </div>
     </div>
     <div class="bg-light">
-        {{ $item }}
         <div class="container-fluid g-0">
             <div class="d-flex flex-row justify-content-center">
                 <div class="p-2 " style="width: 756px;">

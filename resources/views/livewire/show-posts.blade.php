@@ -80,6 +80,31 @@
                         </div>
                     </div>
                 </div>
+                @if ($is_post)
+                    <div class="m-4">
+                        <form action="{{ route('post.store', ['id' => $item->hashid]) }}" method="POST">
+                            @csrf
+                            <textarea class="form-control" rows="3" id="comment" name="body" placeholder="Berikan pendapatmu..."
+                                required></textarea>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-2">
+                                <button class="btn btn-primary btn-sm rounded-pill px-5" type="submit">Kirim</button>
+                            </div>
+                        </form>
+                    </div>
+                    <hr>
+                    <div class="m-4">
+                        @if (session()->has('success'))
+                            <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                                <i class="fa-solid fa-check"></i>
+                                <strong>Komentar berhasil ditambahkan</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        @endif
+                        {{-- @include('components.comment', ['comments' => $item->comments, 'post' => $item]) --}}
+                        @include('components.comment')
+                    </div>
+                @endif
             </div>
         </div>
     @endforeach

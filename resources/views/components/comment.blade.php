@@ -2,7 +2,7 @@
     <div class="d-flex">
         <div class="d-flex flex-column">
             <div class="">
-                <img src="{{ $item->user->avatar }}" class="rounded-circle" style="width: 28px;">
+                <img src="https://i.pravatar.cc/50" class="rounded-circle" style="width: 28px;">
             </div>
             <div class="d-flex justify-content-center flex-fill">
                 <div class="vr"></div>

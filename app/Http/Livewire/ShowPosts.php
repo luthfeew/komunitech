@@ -11,6 +11,7 @@ class ShowPosts extends Component
 {
     public $numResults = 5;
     public $community;
+    public $post_id;
 
     protected $listeners = [
         'load-more' => 'loadMore'
@@ -53,17 +54,23 @@ class ShowPosts extends Component
 
     public function render()
     {
-        if ($this->community) {
+        if ($this->post_id) {
+            $posts = Post::where('id', $this->post_id)->get();
+            $is_community = true;
+            $is_post = true;
+        } elseif ($this->community) {
             $posts = Post::where('community_id', $this->community->id)
                 ->orderBy('created_at', 'desc')
                 ->take($this->numResults)
                 ->get();
             $is_community = true;
+            $is_post = false;
         } else {
             $posts = Post::orderBy('created_at', 'desc')
                 ->take($this->numResults)
                 ->get();
             $is_community = false;
+            $is_post = false;
         }
 
         // encode post id using hashids
@@ -74,7 +81,8 @@ class ShowPosts extends Component
         $this->dispatchBrowserEvent('loading-complete');
         return view('livewire.show-posts', [
             'posts' => $posts,
-            'is_community' => $is_community
+            'is_community' => $is_community,
+            'is_post' => $is_post,
         ]);
     }
 }
