@@ -26,6 +26,8 @@ Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::get('/k/submit', [CommunityController::class, 'create'])->name('community.create');
+Route::post('/k/submit', [CommunityController::class, 'store'])->name('community.store');
 Route::get('/k/{k_slug}', [CommunityController::class, 'show'])->name('community.show');
 Route::get('/k/{k_slug}/submit', [PostController::class, 'create'])->name('post.create');
 Route::post('/k/{k_slug}/submit', [PostController::class, 'store'])->name('post.store');

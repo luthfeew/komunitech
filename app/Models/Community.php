@@ -9,6 +9,12 @@ class Community extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'slug',
+        'description',
+    ];
+
     public function users()
     {
         return $this->belongsToMany(User::class, 'community_users', 'community_id', 'user_id')->withTimestamps();
