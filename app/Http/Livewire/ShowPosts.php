@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Post;
+use App\Models\Community;
 use Vinkla\Hashids\Facades\Hashids;
 use Illuminate\Support\Facades\Auth;
 
@@ -66,9 +67,24 @@ class ShowPosts extends Component
             $is_community = true;
             $is_post = false;
         } else {
-            $posts = Post::orderBy('created_at', 'desc')
-                ->take($this->numResults)
-                ->get();
+            if (Auth::check()) {
+                $user_id = Auth::user()->id;
+
+                // get user communities
+                $communities = Community::whereHas('users', function ($query) use ($user_id) {
+                    $query->where('user_id', $user_id);
+                })->get();
+
+                // get posts from user communities
+                $posts = Post::whereIn('community_id', $communities->pluck('id'))
+                    ->orderBy('created_at', 'desc')
+                    ->take($this->numResults)
+                    ->get();
+            } else {
+                $posts = Post::orderBy('created_at', 'desc')
+                    ->take($this->numResults)
+                    ->get();
+            }
             $is_community = false;
             $is_post = false;
         }
