@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\PostComment;
+use App\Models\Community;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Vinkla\Hashids\Facades\Hashids;
 
 class PostController extends Controller
 {
@@ -22,9 +27,14 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($k_slug)
     {
-        //
+        // get community id from slug
+        $community = Community::where('slug', $k_slug)->first();
+
+        return view('post.create', [
+            'community' => $community,
+        ]);
     }
 
     /**
@@ -33,9 +43,27 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $k_slug)
     {
-        //
+        // get community id from slug
+        $community = Community::where('slug', $k_slug)->first();
+
+        // validate request
+        $request->validate([
+            'title' => 'required',
+        ]);
+
+        // create post
+        Post::create([
+            'title' => $request->title,
+            'slug' => Str::slug($request->title, '_'),
+            'body' => $request->body,
+            'user_id' => Auth::id(),
+            'community_id' => $community->id,
+        ]);
+
+        // redirect to community page
+        return redirect()->route('community.show', ['k_slug' => $k_slug]);
     }
 
     /**
@@ -44,9 +72,15 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Post $post, $k_slug, $id, $p_slug = null)
     {
-        //
+        // decode post id using hashids
+        $post_id = Hashids::decode($id)[0];
+        $post = Post::find($post_id);
+        return view('post.show', [
+            'item' => $post,
+            'hashid' => $id,
+        ]);
     }
 
     /**

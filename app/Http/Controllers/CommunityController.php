@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Community;
+use App\Models\CommunityUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class CommunityController extends Controller
 {
@@ -24,7 +27,7 @@ class CommunityController extends Controller
      */
     public function create()
     {
-        //
+        return view('community.create');
     }
 
     /**
@@ -35,7 +38,22 @@ class CommunityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+
+        // create community and attach in community_user table
+        $community = Community::create([
+            'name' => $request->name,
+            'slug' => Str::slug($request->name, '_'),
+            'description' => $request->description,
+        ]);
+
+        CommunityUser::create([
+            'community_id' => $community->id,
+            'user_id' => Auth::user()->id,
+            'role' => 'owner',
+        ]);
+
+        return redirect()->route('community.show', $community->slug);
     }
 
     /**
@@ -44,9 +62,12 @@ class CommunityController extends Controller
      * @param  \App\Models\Community  $community
      * @return \Illuminate\Http\Response
      */
-    public function show(Community $community)
+    public function show(Community $community, $k_slug)
     {
-        //
+        $community = Community::where('slug', $k_slug)->first();
+        return view('community.show', [
+            'item' => $community,
+        ]);
     }
 
     /**

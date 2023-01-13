@@ -24,6 +24,9 @@
     <!-- Custom Styles -->
     @livewireStyles
     @yield('styles')
+
+    <!-- Custom Scripts -->
+    @yield('js-head')
 </head>
 
 <body>
@@ -37,7 +40,7 @@
 
     <!-- Custom Scripts -->
     @livewireScripts
-    @yield('scripts')
+    @yield('js-body')
 </body>
 
 </html>
