@@ -35,4 +35,6 @@ Route::get('/k/{k_slug}/post/{id}/{p_slug?}', [PostController::class, 'show'])->
 Route::post('/post/{id}/submit', [PostCommentController::class, 'store'])->name('comment.store');
 Route::post('/post/{post_id}/{comment_id}/reply', [PostCommentController::class, 'reply'])->name('comment.reply');
 
+Route::get('/search', [HomeController::class, 'search'])->name('search');
+
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -84,6 +84,8 @@ class ShowPosts extends Component
                 $posts = Post::orderBy('created_at', 'desc')
                     ->take($this->numResults)
                     ->get();
+                
+                $is_guest = true;
             }
             $is_community = false;
             $is_post = false;
@@ -99,6 +101,7 @@ class ShowPosts extends Component
             'posts' => $posts,
             'is_community' => $is_community,
             'is_post' => $is_post,
+            'is_guest' => $is_guest ?? false
         ]);
     }
 }

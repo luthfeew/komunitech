@@ -13,6 +13,8 @@ class Community extends Model
         'name',
         'slug',
         'description',
+        'logo',
+        'banner',
     ];
 
     public function users()
