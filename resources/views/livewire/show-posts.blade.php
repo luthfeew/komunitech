@@ -49,7 +49,7 @@
                             <div class="media-container">
                                 <img src="{{ $item->media->pluck('url')->first() }}" class="img-fluid">
                                 @if (!$is_post)
-                                    <div class="text">see full image</div>
+                                    <div class="text">lihat gambar penuh</div>
                                 @endif
                             </div>
                         @else

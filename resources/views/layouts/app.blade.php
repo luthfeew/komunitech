@@ -27,6 +27,16 @@
 
     <!-- Custom Scripts -->
     @yield('js-head')
+
+    <style>
+        input[type="text"] {
+            background-color: white !important
+        }
+
+        textarea {
+            background-color: white !important;
+        }
+    </style>
 </head>
 
 <body>

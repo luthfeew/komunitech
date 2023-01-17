@@ -31,9 +31,9 @@
             <hr>
             <div class="d-grid gap-2 fw-semibold">
                 <button class="btn btn-outline-primary rounded-pill"
-                    style="--bs-btn-hover-color: #0d6efd; --bs-btn-hover-bg: #0d6efd12;" type="button">Joined</button>
+                    style="--bs-btn-hover-color: #0d6efd; --bs-btn-hover-bg: #0d6efd12;" type="button">Tergabung</button>
                 <a href="{{ route('post.create', ['k_slug' => $community->slug]) }}"
-                    class="btn btn-primary rounded-pill" type="button">Create Post</a>
+                    class="btn btn-primary rounded-pill" type="button">Buat Postingan</a>
             </div>
         </div>
     </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostCommentController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,7 @@ Route::get('/k/{k_slug}/post/{id}/{p_slug?}', [PostController::class, 'show'])->
 Route::post('/post/{id}/submit', [PostCommentController::class, 'store'])->name('comment.store');
 Route::post('/post/{post_id}/{comment_id}/reply', [PostCommentController::class, 'reply'])->name('comment.reply');
 
+Route::get('/user/community', [UserController::class, 'userCommunity'])->name('user.community');
 Route::get('/search', [HomeController::class, 'search'])->name('search');
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

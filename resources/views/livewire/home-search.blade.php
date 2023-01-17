@@ -21,13 +21,10 @@
     </div>
 
     <div class="card card-body mt-2">
-
-        {{-- {{ $communities }} --}}
-
         @forelse ($communities as $item)
             <div class="d-flex flex-row align-items-center border">
                 <div class="p-2">
-                    <img src="https://picsum.photos/seed/picsum/40/40" width="36" class="rounded-circle">
+                    <img src="{{ $item->logo }}" width="36" class="rounded-circle">
                 </div>
                 <div class="d-flex flex-column flex-grow-1">
                     <div>
@@ -43,7 +40,13 @@
                     </div>
                 </div>
                 <div class="p-2">
-                    <button type="button" class="rounded-pill btn btn-outline-primary">Gabung</button>
+                    @if ($item->is_member)
+                        <button wire:click="leaveCommunity({{ $item->id }})" type="button"
+                            class="rounded-pill btn btn-primary">Tergabung</button>
+                    @else
+                        <button wire:click="joinCommunity({{ $item->id }})" type="button"
+                            class="rounded-pill btn btn-outline-primary">Gabung</button>
+                    @endif
                 </div>
             </div>
         @empty

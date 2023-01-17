@@ -4,7 +4,7 @@
             <div class="d-flex">
                 <div class="d-flex flex-column">
                     <div class="">
-                        <img src="https://i.pravatar.cc/50" class="rounded-circle" style="width: 28px;">
+                        <img src="{{ asset('/') }}img/user.png" class="rounded-circle" style="width: 28px;">
                     </div>
                     <div class="d-flex justify-content-center flex-fill">
                         <div class="vr"></div>
