@@ -27,6 +27,11 @@ class CommunityController extends Controller
      */
     public function create()
     {
+        // if user is not logged in, redirect to login page
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
         return view('community.create');
     }
 
@@ -45,6 +50,8 @@ class CommunityController extends Controller
             'name' => $request->name,
             'slug' => Str::slug($request->name, '_'),
             'description' => $request->description,
+            'logo' => 'https://picsum.photos/seed/picsum/80/80',
+            'banner' => 'https://picsum.photos/seed/picsum//1280/360',
         ]);
 
         CommunityUser::create([

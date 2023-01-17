@@ -1,5 +1,11 @@
 <div>
-    @foreach ($posts as $item)
+    @if ($is_guest)
+        <div class="card card-body mt-2">
+            <i class="fa-solid fa-circle-info"></i>
+            Login untuk mendapatkan akses lebih banyak.
+        </div>
+    @endif
+    @forelse ($posts as $item)
         <div class="card mt-2">
             <div class="card-body p-0">
                 <div class="d-flex flex-row">
@@ -43,7 +49,7 @@
                             <div class="media-container">
                                 <img src="{{ $item->media->pluck('url')->first() }}" class="img-fluid">
                                 @if (!$is_post)
-                                    <div class="text">see full image</div>
+                                    <div class="text">lihat gambar penuh</div>
                                 @endif
                             </div>
                         @else
@@ -110,5 +116,9 @@
                 @endif
             </div>
         </div>
-    @endforeach
+    @empty
+        <div class="card card-body mt-2">
+            <p class="m-0">Belum ada apa-apa di sini</p>
+        </div>
+    @endforelse
 </div>
